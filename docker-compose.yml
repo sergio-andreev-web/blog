@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: 12345
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  laravel:
+    build:
+      context: ./laravel
+    container_name: laravel
+    restart: always
+    environment:
+      DB_HOST: mysql
+      DB_DATABASE: laravel
+      DB_USERNAME: laravel
+      DB_PASSWORD: 12345
+    volumes:
+      - ./laravel:/var/www/html
+    depends_on:
+      - mysql
+
+  nginx:
+    build:
+      context: ./docker/nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "8000:80"
+    volumes:
+      - ./laravel:/var/www/html
+    depends_on:
+      - laravel
+
+  frontend:
+    build:
+      context: ./front
+    container_name: frontend
+    restart: always
+    volumes:
+      - ./front:/src
+    ports:
+      - "8080:8080"
+    depends_on:
+      - laravel
+
+volumes:
+  mysql_data:
