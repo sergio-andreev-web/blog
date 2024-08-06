@@ -26,3 +26,35 @@ Follow these steps to set up and run the project locally:
       cd ..
    ```
 
+3. Navigate to the Laravel directory and install PHP dependencies:
+
+   ```bash
+      cd laravel
+      composer install
+      cd ..
+   ```
+
+4. Start Docker containers:
+
+   ```bash
+      docker-compose up -d --build
+   ```
+   
+5. Run database migrations:
+
+   ```bash
+      cd laravel
+      php artisan migrate
+   ```
+
+6. Install Laravel Passport (for API authentication):
+
+   ```bash
+      php artisan passport:install
+   ```
+
+7. Seed the database with initial data:
+
+   ```bash
+      php artisan db:seed
+   ```
