@@ -16,13 +16,13 @@ Follow these steps to set up and run the project locally:
 1. **Copy the `.env` file:**
 
    ```bash
-   cp .env.example .env
+      cp .env.example .env
    ```
 2. Navigate to the frontend directory and install dependencies:
 
    ```bash
-cd front
-npm install
-cd ..
+      cd front
+      npm install
+      cd ..
    ```
 
